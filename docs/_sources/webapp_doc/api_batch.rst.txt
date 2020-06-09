@@ -1,0 +1,5 @@
+Batch Data REST Api
+====================
+
+.. automodule:: app.mod_api.batch_upload
+   :members:

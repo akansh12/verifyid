@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>The WebApp &#8212; Verifying and Validating College IDs 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Single User REST Api" href="webapp_doc/api_single.html" />
+    <link rel="prev" title="Commands" href="commands.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="webapp_doc/api_single.html" title="Single User REST Api"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="commands.html" title="Commands"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Verifying and Validating College IDs 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-webapp">
+<h1>The WebApp<a class="headerlink" href="#the-webapp" title="Permalink to this headline">¶</a></h1>
+<p>This webapp is meant to be the point of user interaction with the project either through the Web UI or the REST Api.</p>
+<div class="section" id="directory-structure">
+<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>├── app
+│   ├── __init__.py
+│   ├── mod_api
+│   │   ├── batch_upload.py
+│   │   ├── __init__.py
+│   │   └── single_upload.py
+│   ├── mod_upload
+│   │   ├── batch_upload.py
+│   │   ├── __init__.py
+│   │   └── single_upload.py
+│   ├── static
+│   │   └── client
+│   │       └── csv
+│   │           └── batch_data_template.csv
+│   └── templates
+│       ├── _formhelpers.html
+│       └── upload
+│           ├── batch_upload.html
+│           └── single_upload.html
+├── config.py
+├── README.md
+└── run.py</p>
+</div></blockquote>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>You need to add the configurations in the <cite>config.py</cite>
+The variables needed to set are:</p>
+<ul class="simple">
+<li><p><cite>CSRF_SESSION_KEY</cite></p></li>
+<li><p><cite>SECRET_KEY</cite></p></li>
+<li><p><cite>CLIENT_CSV</cite>: Set it to absolute value of <cite>webapp/app/static/client/csv</cite></p></li>
+<li><p><cite>MYSQL_HOST</cite></p></li>
+<li><p><cite>MYSQL_USER</cite></p></li>
+<li><p><cite>MYSQL_PASSWORD</cite></p></li>
+<li><p><cite>MYSQL_DB</cite></p></li>
+</ul>
+</div>
+<div class="section" id="running-the-development-server">
+<h2>Running the Development Server<a class="headerlink" href="#running-the-development-server" title="Permalink to this headline">¶</a></h2>
+<p>Just be in this directory (<cite>webapp</cite>) and run:</p>
+<p><cite>python run.py</cite></p>
+<p>The development server should start at port <cite>8080</cite>.</p>
+</div>
+<div class="section" id="usage-of-rest-api">
+<h2>Usage of REST Api<a class="headerlink" href="#usage-of-rest-api" title="Permalink to this headline">¶</a></h2>
+<p>The REST Api can be used using the <cite>curl</cite> command.</p>
+<p>## Single User Uploads</p>
+<p>First upload the image of the ID card of the user using the command:</p>
+<p><cite>curl -F “image=&#64;&lt;image_file&gt;” &lt;base_url&gt;/api/image</cite></p>
+<p>After a successful upload, you will get an <cite>image_name</cite> in response. Use that <cite>image_name</cite> when uploading data of the user using the command:</p>
+<p><cite>curl –header “Content-Type: application/json” –data ‘{“name”:”&lt;name&gt;”, “college”: “&lt;college_name&gt;”, “department”: “&lt;department&gt;”, “year”: &lt;year&gt;, “image”: “&lt;image_name&gt;”}’ &lt;base_url&gt;/api/data</cite></p>
+<p>## Batch Upload</p>
+<p>First upload a <cite>zip</cite> file having the images of ID cards of all the users using the command:</p>
+<p><cite>curl -F “images=&#64;&lt;zip_file&gt;” &lt;base_url&gt;/api/batch_image</cite></p>
+<p>In response you will get <cite>zip filename</cite> which you need to pass when uploading the csv file.</p>
+<p>Then download the template csv file using <cite>wget</cite> command:</p>
+<p><cite>wget -O template.csv &lt;base_url&gt;/upload/batch/download</cite></p>
+<p>Fill this template csv file with data. <strong>Make sure that you provide the correct image name for the students. If the mapping of the student data and their ID card image name is not correct, it may get rejected by the classifier</strong></p>
+<p>Then upload the filled csv file using the command:</p>
+<p><cite>curl -F “data=&#64;&lt;csv_file&gt;” -F “zipfile=&lt;zip filename&gt;”&lt;base_url&gt;/api/batch_data</cite></p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="webapp_doc/api_single.html">Single User REST Api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webapp_doc/api_batch.html">Batch Data REST Api</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The WebApp</a><ul>
+<li><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#running-the-development-server">Running the Development Server</a></li>
+<li><a class="reference internal" href="#usage-of-rest-api">Usage of REST Api</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="commands.html"
+                        title="previous chapter">Commands</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="webapp_doc/api_single.html"
+                        title="next chapter">Single User REST Api</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/webapp.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="webapp_doc/api_single.html" title="Single User REST Api"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="commands.html" title="Commands"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Verifying and Validating College IDs 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.4.
+    </div>
+  </body>
+</html>

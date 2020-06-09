@@ -1,0 +1,8 @@
+.. include:: ../webapp/README.md
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents
+
+   webapp_doc/api_single
+   webapp_doc/api_batch

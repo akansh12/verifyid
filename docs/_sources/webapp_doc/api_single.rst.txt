@@ -1,0 +1,5 @@
+Single User REST Api
+====================
+
+.. automodule:: app.mod_api.single_upload
+   :members:
