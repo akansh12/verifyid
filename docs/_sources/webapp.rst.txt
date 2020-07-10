@@ -6,3 +6,5 @@
 
    webapp_doc/api_single
    webapp_doc/api_batch
+   webapp_doc/ui_single
+   webapp_doc/ui_batch

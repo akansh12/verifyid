@@ -1,0 +1,5 @@
+Single User WebApp UI
+====================
+
+.. automodule:: app.mod_upload.single_upload
+   :members:

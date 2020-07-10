@@ -1,0 +1,5 @@
+Bridge between WebApp and Models
+================================
+
+.. automodule:: src.models.per_user_prediction
+   :members:

@@ -11,8 +11,8 @@ Verifying and Validating College IDs documentation!
    :caption: Contents
 
    getting-started
-   commands
    webapp
+   models
 
 Indices and tables
 ==================

@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Single User WebApp UI &#8212; Verifying and Validating College IDs 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Batch Data WebApp UI" href="ui_batch.html" />
+    <link rel="prev" title="Batch Data REST Api" href="api_batch.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ui_batch.html" title="Batch Data WebApp UI"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api_batch.html" title="Batch Data REST Api"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Verifying and Validating College IDs 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../webapp.html" accesskey="U">The WebApp</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="single-user-webapp-ui">
+<h1>Single User WebApp UI<a class="headerlink" href="#single-user-webapp-ui" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-app.mod_upload.single_upload"></span><p>This module is used to upload per student data using WebApp UI.</p>
+<dl class="py class">
+<dt id="app.mod_upload.single_upload.IDForm">
+<em class="property">class </em><code class="sig-prename descclassname">app.mod_upload.single_upload.</code><code class="sig-name descname">IDForm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">formdata</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">obj</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prefix</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">meta</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.mod_upload.single_upload.IDForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to build the form for collecting student data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">TextField</span></dt><dd><p>Variable to hold the name entered by the user through the form</p>
+</dd>
+<dt><strong>email</strong><span class="classifier">EmailField</span></dt><dd><p>Variable to hold the email entered by the user through the form</p>
+</dd>
+<dt><strong>college_name</strong><span class="classifier">TextField</span></dt><dd><p>Variable to hold the college name entered by the user through the form</p>
+</dd>
+<dt><strong>department</strong><span class="classifier">TextField</span></dt><dd><p>Variable to hold the department entered by the user through the form</p>
+</dd>
+<dt><strong>year</strong><span class="classifier">IntegerField</span></dt><dd><p>Variable to hold the year entered by the user through the form</p>
+</dd>
+<dt><strong>image</strong><span class="classifier">FileField</span></dt><dd><p>Variable to hold the image uploaded by the user through the form</p>
+</dd>
+<dt><strong>image_by_url</strong><span class="classifier">TextField</span></dt><dd><p>Variable to hold the url entered by image to fetch the image</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>upload_form()</strong></p></td>
+<td><p>Process the data uploaded by the user through form and return result</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="app.mod_upload.single_upload.IDForm.upload_form">
+<code class="sig-name descname">upload_form</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.mod_upload.single_upload.IDForm.upload_form" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to process the data uploaded by user through form and return the result.</p>
+<p>It takes the data, applies validation checks then pass it to the models to get
+a validity score which is shown to the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>html</dt><dd><p>The rendered template file</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="app.mod_upload.single_upload.allowed_file">
+<code class="sig-prename descclassname">app.mod_upload.single_upload.</code><code class="sig-name descname">allowed_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.mod_upload.single_upload.allowed_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to check is the given file name has a valid extensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filename</strong><span class="classifier">string</span></dt><dd><p>A string having the full name of the file including the extension.</p>
+</dd>
+<dt><strong>extensions</strong><span class="classifier">set</span></dt><dd><p>The set of all the allowed extensions for the given file</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>Is the extension of the file allowed or not</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="api_batch.html"
+                        title="previous chapter">Batch Data REST Api</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ui_batch.html"
+                        title="next chapter">Batch Data WebApp UI</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/webapp_doc/ui_single.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ui_batch.html" title="Batch Data WebApp UI"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="api_batch.html" title="Batch Data REST Api"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Verifying and Validating College IDs 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../webapp.html" >The WebApp</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.4.
+    </div>
+  </body>
+</html>

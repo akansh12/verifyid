@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bridge between WebApp and Models &#8212; Verifying and Validating College IDs 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Codes associated to using the deep learning models" href="../models.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../models.html" title="Codes associated to using the deep learning models"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Verifying and Validating College IDs 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../models.html" accesskey="U">Codes associated to using the deep learning models</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.models.per_user_prediction">
+<span id="bridge-between-webapp-and-models"></span><h1>Bridge between WebApp and Models<a class="headerlink" href="#module-src.models.per_user_prediction" title="Permalink to this headline">¶</a></h1>
+<p>This module is used to connect the webapp with the underlying models.</p>
+<p>It takes the image path and the student data, passes the image through all the models
+sequentially, applies fuzzy string matching algorithm to generate a validity score.</p>
+<dl class="py function">
+<dt id="src.models.per_user_prediction.get_validity">
+<code class="sig-prename descclassname">src.models.per_user_prediction.</code><code class="sig-name descname">get_validity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">student_data</span></em>, <em class="sig-param"><span class="n">image_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.per_user_prediction.get_validity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to pass the image through underlying models and
+apply fuzzy string matching to get validity score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>student_data</strong><span class="classifier">dict</span></dt><dd><p>A dictionary having the data entered by the student.</p>
+</dd>
+<dt><strong>image_name</strong><span class="classifier">string</span></dt><dd><p>The name of the image of ID card associated with the student</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>validity_score</strong><span class="classifier">int</span></dt><dd><p>The score out of hundred telling how valid is the given ID card.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../models.html"
+                        title="previous chapter">Codes associated to using the deep learning models</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/models/per_user.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../models.html" title="Codes associated to using the deep learning models"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Verifying and Validating College IDs 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../models.html" >Codes associated to using the deep learning models</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.4.
+    </div>
+  </body>
+</html>

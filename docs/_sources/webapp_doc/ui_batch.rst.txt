@@ -1,0 +1,5 @@
+Batch Data WebApp UI
+====================
+
+.. automodule:: app.mod_upload.batch_upload
+   :members:

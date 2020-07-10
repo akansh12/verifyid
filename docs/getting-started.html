@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Getting started &#8212; Verifying and Validating College IDs 0.1 documentation</title>
+    <title>Verifying and Validating College IDs &#8212; Verifying and Validating College IDs 0.1 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -16,7 +16,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Commands" href="commands.html" />
+    <link rel="next" title="The WebApp" href="webapp.html" />
     <link rel="prev" title="Verifying and Validating College IDs documentation!" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -29,7 +29,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="commands.html" title="Commands"
+          <a href="webapp.html" title="The WebApp"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Verifying and Validating College IDs documentation!"
@@ -43,11 +43,106 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="getting-started">
-<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>This is where you describe how to get set up on a clean install, including the
-commands necessary to get the raw data (using the <cite>sync_data_from_s3</cite> command,
-for example), and then how to make the cleaned, final data sets.</p>
+  <div class="section" id="verifying-and-validating-college-ids">
+<h1>Verifying and Validating College IDs<a class="headerlink" href="#verifying-and-validating-college-ids" title="Permalink to this headline">¶</a></h1>
+<p>The objective of this project is to build an intelligent system which correctly identifies a valid colIege ID card from a pool of ID card images and extracts textual data to verify against the details provided by the user</p>
+<div class="section" id="project-organization">
+<h2>Project Organization<a class="headerlink" href="#project-organization" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>├── LICENSE
+├── Makefile           &lt;- Makefile with commands like <cite>make data</cite> or <cite>make train</cite>
+├── README.md          &lt;- The top-level README for developers using this project.
+├── data
+│   ├── external       &lt;- Data from third party sources.
+│   ├── interim        &lt;- Intermediate data that has been transformed.
+│   ├── processed      &lt;- The final, canonical data sets for modeling.
+│   └── raw            &lt;- The original, immutable data dump.
+│
+├── docs               &lt;- A default Sphinx project; see sphinx-doc.org for details
+│
+├── models             &lt;- Trained and serialized models, model predictions, or model summaries
+│
+├── notebooks          &lt;- Jupyter notebooks. Naming convention is a number (for ordering),
+│                         the creator’s initials, and a short <cite>-</cite> delimited description, e.g.
+│                         <cite>1.0-jqp-initial-data-exploration</cite>.
+│
+├── references         &lt;- Data dictionaries, manuals, and all other explanatory materials.
+│
+├── reports            &lt;- Generated analysis as HTML, PDF, LaTeX, etc.
+│   └── figures        &lt;- Generated graphics and figures to be used in reporting
+│
+├── requirements.txt   &lt;- The requirements file for reproducing the analysis environment, e.g.
+│                         generated with <cite>pip freeze &gt; requirements.txt</cite>
+│
+├── setup.py           &lt;- makes project pip installable (pip install -e .) so src can be imported
+├── src                &lt;- Source code for use in this project.
+│   ├── __init__.py    &lt;- Makes src a Python module
+│   │
+│   ├── data           &lt;- Scripts to download or generate data
+│   │   └── make_dataset.py
+│   │
+│   ├── features       &lt;- Scripts to turn raw data into features for modeling
+│   │   └── build_features.py
+│   │
+│   ├── models         &lt;- Scripts to train models and then use trained models to make
+│   │   │                 predictions
+│   │   ├── predict_model.py
+│   │   └── train_model.py
+│   │
+│   └── visualization  &lt;- Scripts to create exploratory and results oriented visualizations
+│       └── visualize.py
+│
+└── tox.ini            &lt;- tox file with settings for running tox; see tox.readthedocs.io</p>
+</div></blockquote>
+</div>
+<div class="section" id="pre-requisites">
+<h2>Pre-Requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this headline">¶</a></h2>
+<p>This project is built using Python language only, so make sure you have the latest version of Python.
+To get it (along with other essential packages) in Debian-based distribution run:</p>
+<p><cite># apt install python3 git make</cite></p>
+<p>Now go ahead and clone this repository by running the command:</p>
+<p><cite>$ git clone https://github.com/eyic1eyantra/eysip2020-4-Verification-and-validation-ID.git</cite></p>
+</div>
+<div class="section" id="setting-up">
+<h2>Setting Up<a class="headerlink" href="#setting-up" title="Permalink to this headline">¶</a></h2>
+<p>Most things are automated for you using [make](<a class="reference external" href="https://swcarpentry.github.io/make-novice/">https://swcarpentry.github.io/make-novice/</a>)</p>
+<p>To see the available make recipes, run:</p>
+<p><cite>$ make help</cite></p>
+<p>To check if you have the required python version, run:</p>
+<p><cite>$ make test_environment</cite></p>
+<p>For now, the <cite>create_environment</cite> recipe does not work so we will create a virtual environment ourself. For the Debian-based systems, run:</p>
+<p><cite>$ sudo apt-get install python3-pip</cite></p>
+<p><cite>$ python3 -m pip install –user virtualenv</cite></p>
+<p>Now make sure you are in the directory having this repo (or it’s parent directory), and run:</p>
+<p><cite>$ python3 -m venv env</cite></p>
+<p>Here <cite>env</cite> is the name of the virtual environment, you can have any name you want.
+To activate the environment, run:</p>
+<p><cite>$ source env/bin/activate</cite></p>
+<p>Now, to install all the required python packages, run:</p>
+<p><cite>$ pip install -r requirements.txt</cite></p>
+</div>
+<div class="section" id="getting-the-models">
+<h2>Getting the models<a class="headerlink" href="#getting-the-models" title="Permalink to this headline">¶</a></h2>
+<p>You should have gotten [<cite>gdown</cite>](<a class="reference external" href="https://pypi.org/project/gdown/">https://pypi.org/project/gdown/</a>) with other python packages. You can use it to download the models from Google drive by simply running:</p>
+<p><cite>$ python get_models_from_gdrive.py</cite></p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The usage as of now is simple. You will need the trained models to run the code so make sure you have them (.pth files) in the <cite>models</cite> directory.
+Now, place all the images you have in the <cite>data/raw</cite> directory.</p>
+<p>Then run the command:</p>
+<p><cite>$ python src/models/predict_model.py</cite></p>
+<p>This will take some time depending on your CPU and/or GPU capacities. You can go and grab a cup of coffee or read the output on the console which is designed to help
+you know what is going on.</p>
+<p>After it’s done executing, you will find that all images classified as college IDs (ID) are moved to the <cite>data/interim</cite> directory and the others (NON-ID) are left in the <cite>data/raw</cite> directory. Also, you will find a new file called <cite>processing.log</cite> in <cite>src/models</cite> which has the results of ID card classification and text recognition with confidence scores so be sure to check it out using your favorite text editor.</p>
+</div>
+<div class="section" id="using-the-webapp">
+<h2>Using the WebApp<a class="headerlink" href="#using-the-webapp" title="Permalink to this headline">¶</a></h2>
+<p>The WebApp of this project is supposed to act as point of interaction between the model and the user.
+The instructions for using the WebApp is given in the [WebApp specific README](webapp/README.md)</p>
+<hr class="docutils" />
+<p>&lt;p&gt;&lt;small&gt;Project based on the &lt;a target=”_blank” href=”<a class="reference external" href="https://drivendata.github.io/cookiecutter-data-science/">https://drivendata.github.io/cookiecutter-data-science/</a>”&gt;cookiecutter data science project template&lt;/a&gt;. #cookiecutterdatascience&lt;/small&gt;&lt;/p&gt;</p>
+</div>
 </div>
 
 
@@ -56,12 +151,25 @@ for example), and then how to make the cleaned, final data sets.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Verifying and Validating College IDs</a><ul>
+<li><a class="reference internal" href="#project-organization">Project Organization</a></li>
+<li><a class="reference internal" href="#pre-requisites">Pre-Requisites</a></li>
+<li><a class="reference internal" href="#setting-up">Setting Up</a></li>
+<li><a class="reference internal" href="#getting-the-models">Getting the models</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#using-the-webapp">Using the WebApp</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
                         title="previous chapter">Verifying and Validating College IDs documentation!</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="commands.html"
-                        title="next chapter">Commands</a></p>
+  <p class="topless"><a href="webapp.html"
+                        title="next chapter">The WebApp</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -93,7 +201,7 @@ for example), and then how to make the cleaned, final data sets.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="commands.html" title="Commands"
+          <a href="webapp.html" title="The WebApp"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Verifying and Validating College IDs documentation!"
